@@ -5,7 +5,7 @@
       "src": "api/main.py",
       "use": "@vercel/python",
       "config": {
-        "maxLambdaSize": "150mb",
+        "maxLambdaSize": "100mb",
         "includeFiles": [
           "templates/**",
           "requirements.txt"
@@ -16,7 +16,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "api/main.handler" 
+      "dest": "api/main.handler"
     }
   ]
 }
