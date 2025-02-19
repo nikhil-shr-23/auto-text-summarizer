@@ -6,6 +6,7 @@ from transformers import pipeline
 import torch
 import os
 
+
 # Initialize FastAPI app
 app = FastAPI()
 
@@ -67,3 +68,4 @@ async def summarize(request: SummaryRequest):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}") 
+    
