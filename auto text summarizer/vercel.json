@@ -4,9 +4,12 @@
       {
         "src": "api/app.py",
         "use": "@vercel/python",
-        "config": { 
-          "maxLambdaSize": "50mb",
-          "includeFiles": ["templates/**"]
+        "config": {
+          "maxLambdaSize": "300mb",
+          "includeFiles": [
+            "templates/**",
+            "requirements.txt"
+          ]
         }
       }
     ],
