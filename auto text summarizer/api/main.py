@@ -15,7 +15,7 @@ TEMPLATES_DIR = os.path.join(os.path.dirname(__file__), "../templates")
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
 
-MODEL_NAME = "philschmid/distilbart-cnn-12-6-samsum"
+MODEL_NAME =  "sshleifer/distilbart-cnn-6-6""
 
 summarizer = None
 
