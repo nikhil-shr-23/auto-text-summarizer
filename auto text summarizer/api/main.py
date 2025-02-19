@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 from transformers import pipeline
 import os
-from mangum import Mangum  # Required for Vercel
+from mangum import Mangum 
 
 app = FastAPI()
 
