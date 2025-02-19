@@ -71,4 +71,10 @@ async def summarize(request: SummaryRequest):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}") 
+
+
+
+@app.on_event("startup")
+async def load_model():
+    get_summarizer()  
     
