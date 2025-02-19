@@ -10,12 +10,11 @@ import os
 # Initialize FastAPI app
 app = FastAPI()
 
-# Get absolute path to templates directory
-TEMPLATES_DIR = os.path.join(os.path.dirname(__file__), "../templates")
+TEMPLATES_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "templates")
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
 
-MODEL_NAME =  "sshleifer/distilbart-cnn-6-6""
+MODEL_NAME = "philschmid/distilbart-cnn-12-6-samsum"
 
 summarizer = None
 
@@ -39,11 +38,7 @@ class SummaryRequest(BaseModel):
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
-    try:
-        return templates.TemplateResponse("index.html", {"request": request})
-    except Exception as e:
-        print(f"Error rendering template: {str(e)}")
-        return HTMLResponse(content=f"Error: {str(e)}", status_code=500)
+    return templates.TemplateResponse("index.html", {"request": request})
 
 @app.post("/summarize")
 async def summarize(request: SummaryRequest):
@@ -71,10 +66,4 @@ async def summarize(request: SummaryRequest):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}") 
-
-
-
-@app.on_event("startup")
-async def load_model():
-    get_summarizer()  
     
