@@ -11,10 +11,12 @@ import os
 app = FastAPI()
 
 # Get absolute path to templates directory
-TEMPLATES_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "templates")
+TEMPLATES_DIR = os.path.join(os.path.dirname(__file__), "../templates")
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
-# Initialize the summarization pipeline with lazy loading
+
+MODEL_NAME = "philschmid/distilbart-cnn-12-6-samsum"
+
 summarizer = None
 
 def get_summarizer():
@@ -23,11 +25,12 @@ def get_summarizer():
         try:
             summarizer = pipeline(
                 "summarization",
-                model="sshleifer/distilbart-cnn-12-6",
-                device=-1  # Force CPU usage on Vercel
+                model=MODEL_NAME,
+                device=-1,
+                torch_dtype=torch.float16 if torch.cuda.is_available() else None
             )
         except Exception as e:
-            print(f"Error loading model: {e}")
+            print(f"Model loading failed: {str(e)}")
             return None
     return summarizer
 
